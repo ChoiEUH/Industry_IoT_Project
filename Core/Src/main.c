@@ -776,7 +776,7 @@ void UsartTask(void *argument)
   for(;;)
   {
 	  if (osMessageQueueGet(uartQueue01Handle, buf, NULL, osWaitForever) == osOK) {
-	  	             HAL_UART_Transmit(&huart2,(uint8_t*)buf, strlen(buf),0xFFFF);
+	  	             HAL_UART_Transmit(&huart1,(uint8_t*)buf, strlen(buf),0xFFFF);
 	  	         }
   }
   /* USER CODE END UsartTask */
@@ -820,7 +820,7 @@ void Error_Handler(void)
   while (1)
   {
 	  strcpy(buf,"i2cstatuserror\r\n");
-	  HAL_UART_Transmit(&huart2,(uint8_t*)buf,strlen(buf),0xFFFF);
+	  HAL_UART_Transmit(&huart1,(uint8_t*)buf,strlen(buf),0xFFFF);
 	  HAL_Delay(1000);
   }
   /* USER CODE END Error_Handler_Debug */
