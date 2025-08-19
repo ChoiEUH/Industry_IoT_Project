@@ -180,7 +180,7 @@ void CCS_Read(CCS_value *C){
 		HAL_I2C_Mem_Read(&hi2c1,CCS_ADDR,READ_DATA,1,C->tvoc_data,8,100);
 		  C->eCO2 = ((uint16_t)C->tvoc_data[0] << 8) | C->tvoc_data[1];
 	      C->TVOC = ((uint16_t)C->tvoc_data[2] << 8) | C->tvoc_data[3];
-	      sprintf(buf, "eCO2: %d ppm, TVOC: %d ppb\r\n", C->eCO2, C->TVOC);
+	      sprintf(buf, "%d ppm, %d ppb\r\n", C->eCO2, C->TVOC);
 	      osMessageQueuePut(uartQueue01Handle, buf, 0, 0);
 	}
 	osMutexRelease(CCSMutex01Handle);
@@ -203,7 +203,7 @@ void SHT_Read(SHT_value *S){
 
 	  S->temp = -45 + 175 * ((float)S->rtemp / 65535.0);
 	  S->humi = 100 * ((float)S->rhumi / 65535.0);
-	      sprintf(buf, "Temp: %.2f C, Humi: %.2f %%\r\n", S->temp, S->humi);
+	      sprintf(buf, "%.2f C, %.2f %%\r\n", S->temp, S->humi);
 	 osMessageQueuePut(uartQueue01Handle, buf, 0, 0);
     osMutexRelease(SHTMutex02Handle);
 	 }
